@@ -1,0 +1,14 @@
+image: python:latest
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy to prod
+          deployment: Production
+          caches:
+            - pip
+          script:
+            - pip install ansible==2.8.0
+            - cd ansible
+            - ansible-playbook -i ./hosts deploy.yaml
